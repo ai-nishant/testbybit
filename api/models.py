@@ -108,27 +108,28 @@ class Match(models.Model):
 
 class Playerscore(models.Model):
 
-    player = models.ForeignKey(Player,on_delete=models.SET_NULL,blank=True,null=True)
     match = models.ForeignKey(Match,on_delete=models.SET_NULL,blank=True,null=True)
-    team = models.ForeignKey(Team,on_delete=models.SET_NULL,blank=True,null=True)
-    created_at = models.DateTimeField(auto_now=True,blank=True,null=True)
-    updated_at = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    player = models.ForeignKey(Player,on_delete=models.SET_NULL,blank=True,null=True)
+    team = models.ForeignKey(Team,on_delete=models.SET_NULL,blank=True,null=True)   
     wide =  models.IntegerField(null=True,blank=True)
     bounce =  models.IntegerField(null=True,blank=True)
     four =  models.IntegerField(null=True,blank=True)
     six = models.IntegerField(null=True,blank=True)
+    created_at = models.DateTimeField(auto_now=True,blank=True,null=True)
+    updated_at = models.DateTimeField(auto_now_add=True,blank=True,null=True)
 
+
+    class Meta:
+        ordering = ["match"]
 
     def __str__(self):
-        return f'{ self.player.player_name }'
-
+        return self.player.player_name
 
 
 
 class Matchscorecard(models.Model):    
     match = models.OneToOneField(Match,on_delete=models.SET_NULL,blank=True,null=True)
-    venue = models.ForeignKey(Venue,on_delete=models.SET_NULL,blank=True,null=True)
-    
+    venue = models.ForeignKey(Venue,on_delete=models.SET_NULL,blank=True,null=True)    
     created_at = models.DateTimeField(auto_now=True,blank=True,null=True)
     updated_at = models.DateTimeField(auto_now_add=True,blank=True,null=True)
 

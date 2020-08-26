@@ -71,3 +71,15 @@
         
 #         return Response(dt.data,status=200)
 #     return Response('change request type')
+
+
+
+
+
+# class VenueViewset(viewsets.ModelViewSet):    
+    
+#     queryset = Venue.objects.all()
+#     serializer_class = VenueSerializer
+#     permission_classes = [IsAuthenticated]
+#     filter_backends = (filters.DjangoFilterBackend,)
+#     filterset_fields = ('venue_name',)
