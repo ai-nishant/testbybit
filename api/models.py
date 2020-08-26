@@ -2,18 +2,18 @@ from django.db import models
 
 class Country(models.Model):
     # unique=True,error_messages={'duplicates':'no duplicate country is allowed'}
-    cname = models.CharField(max_length=50,null=True,blank=True)
+    country_name = models.CharField(max_length=50,null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     updated_at = models.DateTimeField(auto_now=True,blank=True,null=True)
 
     class Meta:
-        ordering = ["cname"]
+        ordering = ["country_name"]
 
     def __str__(self):
-        return self.cname
+        return self.country_name
 
     def save(self, *args, **kwargs):
-        self.cname = self.cname.upper()
+        self.country_name = self.country_name.upper()
         return super(Country, self).save(*args, **kwargs)
 
 

@@ -10,7 +10,7 @@ class CountrySerializer(serializers.HyperlinkedModelSerializer):
 
 
 class VenueSerializer(serializers.ModelSerializer):
-    country = serializers.CharField(source='country.cname',read_only=True)
+    country = serializers.CharField(source='country.country_name',read_only=True)
     class Meta:
         model = Venue
         fields = ['venue_name','country']
