@@ -1,7 +1,7 @@
 from django.urls import path , include
 from .views import ( api_index , CountriesViewset , VenueViewset,
 
-TeamViewset,PlayerViewset , MatchViewset , MatchscorecardViewset )
+TeamViewset,PlayerViewset , MatchViewset ,PlayerscoreViewset, MatchscorecardViewset )
 from rest_framework.routers import SimpleRouter , DefaultRouter
 
 routes = DefaultRouter()
@@ -10,6 +10,7 @@ routes.register('venue',VenueViewset)
 routes.register('team',TeamViewset)
 routes.register('player',PlayerViewset)
 routes.register('match',MatchViewset)
+routes.register('playerscore',PlayerscoreViewset)
 routes.register('matchscorecard',MatchscorecardViewset)
 
 urlpatterns = [    
