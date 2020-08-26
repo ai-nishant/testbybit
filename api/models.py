@@ -60,7 +60,6 @@ class Player(models.Model):
     gender = models.CharField(max_length=6,choices =gender ,null=True,blank=True)
     country = models.ForeignKey(Country,on_delete=models.SET_NULL,null=True)
     team = models.ForeignKey(Team,on_delete=models.SET_NULL,null=True)
-    playerscore = models.IntegerField(null=True,blank=True)
     created_at = models.DateTimeField(auto_now=True,blank=True,null=True)
     updated_at = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     
@@ -107,13 +106,34 @@ class Match(models.Model):
     #     self.match_type = self.match_type.upper()        
     #     return super(Match, self).save(*args, **kwargs)
 
-class Matchscorecard(models.Model):    
-    match = models.OneToOneField(Match,on_delete=models.SET_NULL,blank=True,null=True)
-    venue = models.ForeignKey(Venue,on_delete=models.SET_NULL,blank=True,null=True)
+class Playerscore(models.Model):
+
+    player = models.ForeignKey(Player,on_delete=models.SET_NULL,blank=True,null=True)
+    match = models.ForeignKey(Match,on_delete=models.SET_NULL,blank=True,null=True)
+    team = models.ForeignKey(Team,on_delete=models.SET_NULL,blank=True,null=True)
+    created_at = models.DateTimeField(auto_now=True,blank=True,null=True)
+    updated_at = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     wide =  models.IntegerField(null=True,blank=True)
     bounce =  models.IntegerField(null=True,blank=True)
     four =  models.IntegerField(null=True,blank=True)
     six = models.IntegerField(null=True,blank=True)
 
+
+    def __str__(self):
+        return f'{ self.player.player_name }'
+
+
+
+
+class Matchscorecard(models.Model):    
+    match = models.OneToOneField(Match,on_delete=models.SET_NULL,blank=True,null=True)
+    venue = models.ForeignKey(Venue,on_delete=models.SET_NULL,blank=True,null=True)
+    
+    created_at = models.DateTimeField(auto_now=True,blank=True,null=True)
+    updated_at = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+
     def __str__(self):
         return f'{self.match} at {self.venue} on { self.match.date }'
+
+
+

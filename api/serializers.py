@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Country , Player , Team , Match , Venue , Matchscorecard
+from .models import Country , Player , Team , Match , Venue , Matchscorecard , Playerscore
 
 
 class CountrySerializer(serializers.HyperlinkedModelSerializer):
@@ -35,7 +35,10 @@ class MatchSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-
+class PlayerscoreSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Playerscore
+        fields = '__all__'
 
 
 class MatchscorecardSerializer(serializers.ModelSerializer):

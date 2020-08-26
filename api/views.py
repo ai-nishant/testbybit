@@ -11,11 +11,11 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets
 from django_filters import rest_framework as filters
 #Database model imports
-from .models import Country , Player , Team , Match , Venue , Matchscorecard
+from .models import Country , Player , Team , Match , Venue , Matchscorecard , Playerscore
 
 
 #importing serializers below
-from .serializers import CountrySerializer , VenueSerializer , PlayerSerializer , TeamSerializer ,MatchSerializer,MatchscorecardSerializer
+from .serializers import CountrySerializer , VenueSerializer , PlayerSerializer , TeamSerializer ,MatchSerializer,PlayerscoreSerializer,MatchscorecardSerializer
 
 
 
@@ -81,6 +81,16 @@ class MatchViewset(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_fields = ('')
+
+class PlayerscoreViewset(viewsets.ModelViewSet):    
+    
+    queryset = Playerscore.objects.all()
+    serializer_class = PlayerscoreSerializer
+    permission_classes = [IsAuthenticated]
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_fields = ('')
+
+
 
 class MatchscorecardViewset(viewsets.ModelViewSet):    
     
