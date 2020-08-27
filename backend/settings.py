@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 SECRET_KEY = '!c$@y8h+sc_(82l#p4o^_+jfv5xo*b4@n!pkx@*c3lcim*qu86'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['testbybit.herokuapp.com','theanalytic.herokuapp.com', '127.0.0.1']
 
