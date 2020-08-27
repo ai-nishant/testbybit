@@ -7,6 +7,8 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('rest-auth/', include('rest_auth.urls')),
+
     path('accounts/',include('accounts.urls')),
     path('api/',include('api.urls')),
     path('',include('home.urls'))

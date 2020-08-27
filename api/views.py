@@ -1,7 +1,7 @@
 #core library imports 
 from django.shortcuts import render , HttpResponse ,get_list_or_404 , get_object_or_404
 from django.http import JsonResponse
-
+from django.db.models import Sum
 #Rest Framework Library imports
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view  , permission_classes
@@ -19,12 +19,11 @@ from .serializers import CountrySerializer , VenueSerializer , PlayerSerializer 
 
 
 
-
 @api_view(['GET'])
 def api_index(request):
     api_end_points = {
         
-        'Countries':'/countries',
+        'Countries':'/country',
         'teams':'/teams',
         'players':'/players',
         'player_info':'/player/<str:pk>/',
@@ -115,9 +114,9 @@ class MatchViewset(viewsets.ModelViewSet):
         venue= Venue.objects.get(venue_name=match_data['venue']),
         winner = Team.objects.get(team_name=match_data['winner']),
         looser = Team.objects.get(team_name=match_data['looser']),
-        man_of_the_match = Player.objects.create(player_name=match_data['man_of_the_match']),
-        bowler_of_the_match = Player.objects.create(player_name=match_data['bowler_of_the_match']),
-        best_fielder = Player.objects.create(player_name=match_data['best_fielder']))
+        man_of_the_match = Player.objects.get(player_name=match_data['man_of_the_match']),
+        bowler_of_the_match = Player.objects.get(player_name=match_data['bowler_of_the_match']),
+        best_fielder = Player.objects.get(player_name=match_data['best_fielder']))
         match_data.save()
         serializer = MatchSerializer(match_data)
         return Response(serializer.data)
@@ -135,7 +134,7 @@ class PlayerscoreViewset(viewsets.ModelViewSet):
         playerscore_data = request.data 
         new_playerscore = Playerscore.objects.create(
             match = Match.objects.get(match_no=playerscore_data['match']),
-            player = Player.objects.create(player_name=playerscore_data['player']),
+            player = Player.objects.get(player_name=playerscore_data['player']),
             team = Team.objects.get(team_name=playerscore_data['team']),
             wide = playerscore_data['wide'],
             bounce = playerscore_data['bounce'],
@@ -155,5 +154,5 @@ class MatchscorecardViewset(viewsets.ModelViewSet):
     serializer_class = MatchscorecardSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = (filters.DjangoFilterBackend,)
-    filterset_fields = ('Matchscorecard_name',)
+    filterset_fields = ('scores',)
 

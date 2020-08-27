@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import Sum
+from itertools import chain
 
 class Country(models.Model):
     # unique=True,error_messages={'duplicates':'no duplicate country is allowed'}
@@ -125,11 +127,20 @@ class Playerscore(models.Model):
     def __str__(self):
         return self.player.player_name
 
+    @property
+    def totalscore(self):
+        return self.four * 4 + self.six * 6
 
+    @property
+    def team_total(self):
+        pass
+        
+        
 
 class Matchscorecard(models.Model):    
     match = models.OneToOneField(Match,on_delete=models.SET_NULL,blank=True,null=True)
-    venue = models.ForeignKey(Venue,on_delete=models.SET_NULL,blank=True,null=True)    
+    venue = models.ForeignKey(Venue,on_delete=models.SET_NULL,blank=True,null=True) 
+    scores = models.OneToOneField(Playerscore,on_delete=models.SET_NULL,blank=True,null=True)   
     created_at = models.DateTimeField(auto_now=True,blank=True,null=True)
     updated_at = models.DateTimeField(auto_now_add=True,blank=True,null=True)
 
