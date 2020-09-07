@@ -23,9 +23,9 @@ from .serializers import CountrySerializer , VenueSerializer , PlayerSerializer 
 def api_index(request):
     api_end_points = {
         
-        'Countries':'/country',
-        'teams':'/teams',
-        'players':'/players',
+        'Countries':'/countries',
+        'teams':'/team',
+        'players':'/player',
         'player_info':'/player/<str:pk>/',
         'playerscorecard':'/playerscorecard/<str:pk>/',
         'venue':'/venue',

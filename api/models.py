@@ -1,6 +1,8 @@
 from django.db import models
-from django.db.models import Sum
+from django.db.models import (Sum, Count, Case, When, Avg,
+                              IntegerField, Value)
 from itertools import chain
+from queryset_sequence import QuerySetSequence
 
 class Country(models.Model):
     # unique=True,error_messages={'duplicates':'no duplicate country is allowed'}
@@ -137,7 +139,7 @@ class Playerscore(models.Model):
         
         
 
-class Matchscorecard(models.Model):    
+class Matchscorecard(models.Model):
     match = models.OneToOneField(Match,on_delete=models.SET_NULL,blank=True,null=True)
     venue = models.ForeignKey(Venue,on_delete=models.SET_NULL,blank=True,null=True) 
     scores = models.OneToOneField(Playerscore,on_delete=models.SET_NULL,blank=True,null=True)   
@@ -147,5 +149,8 @@ class Matchscorecard(models.Model):
     def __str__(self):
         return f'{self.match} at {self.venue} on { self.match.date }'
 
-
+    @property
+    def team_match_score(self):
+        result ="hi"
+        return result
 
